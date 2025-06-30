@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Descriptive Analysis Visuals</h1>
+    <p class="lead text-center mb-5">Dive into the insights derived from customer data with these visualizations. Each chart offers a unique perspective on customer behavior and segment characteristics, empowering you with actionable intelligence for strategic decisions.</p>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Correlation Heatmap</h5>
+                </div>
+                <div class="card-body">
+                    <img src="{{ url_for('static', filename='correlation_heatmap.png') }}" class="img-fluid rounded" alt="Correlation Heatmap of Customer Attributes">
+                    <p class="mt-3 text-muted">This heatmap visualizes the correlation coefficients between key customer attributes, such as age, income, education, and occupation. The color intensity of each cell reflects the strength of the correlation—warmer tones (e.g., red) indicate strong positive relationships, while cooler tones (e.g., blue) signify strong negative relationships. Use this to uncover hidden patterns and dependencies that can refine customer segmentation and targeting strategies.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Segment Proportions</h5>
+                </div>
+                <div class="card-body">
+                    <img src="{{ url_for('static', filename='segment_proportions.png') }}" class="img-fluid rounded" alt="Proportions of Customer Segments">
+                    <p class="mt-3 text-muted">This pie chart illustrates the distribution of customers across four segments: Fewer-Opportunities, Standard, Career-Focused, and Well-Off. Each slice represents a segment’s share of the total customer base, providing a clear view of market composition. This insight is essential for prioritizing marketing efforts and tailoring strategies to each segment’s scale and potential.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Average Store Visits per Segment</h5>
+                </div>
+                <div class="card-body">
+                    <img src="{{ url_for('static', filename='avg_store_visits.png') }}" class="img-fluid rounded" alt="Average Store Visits by Segment">
+                    <p class="mt-3 text-muted">This bar chart compares the average number of store visits per customer across the four segments. The height of each bar reflects visit frequency, highlighting which segments are most engaged with your stores. Leverage this data to design promotions or loyalty programs that boost foot traffic where it matters most.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Number of Purchases per Segment</h5>
+                </div>
+                <div class="card-body">
+                    <img src="{{ url_for('static', filename='num_purchases.png') }}" class="img-fluid rounded" alt="Total Purchases by Segment">
+                    <p class="mt-3 text-muted">This chart displays the total number of purchases made by customers in each segment. Each bar’s height indicates purchase volume, revealing which segments are your top revenue drivers. Use this to assess segment profitability and focus resources on high-impact areas.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Average Brand Choice per Segment</h5>
+                </div>
+                <div class="card-body">
+                    <img src="{{ url_for('static', filename='avg_brand_choice.png') }}" class="img-fluid rounded" alt="Brand Preferences by Segment">
+                    <p class="mt-3 text-muted">This visualization showcases the average brand preferences within each segment, potentially as a stacked bar or series of charts. It highlights the proportion of customers favoring specific brands, offering a window into segment-specific tastes. Apply this knowledge for targeted marketing campaigns and personalized product offerings.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Revenue by Segment and Brand</h5>
+                </div>
+                <div class="card-body">
+                    <img src="{{ url_for('static', filename='revenue_by_segment_brand.png') }}" class="img-fluid rounded" alt="Revenue Distribution by Segment and Brand">
+                    <p class="mt-3 text-muted">This grouped bar chart details the revenue generated by each brand across the four segments. Each cluster shows brand performance within a segment, identifying top earners and underperformers. This analysis guides inventory decisions, promotional planning, and product development to maximize profitability.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

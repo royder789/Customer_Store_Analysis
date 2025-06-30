@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-calculator mr-2"></i>Predict Purchase Probability</h5>
+            </div>
+            <div class="card-body">
+                <p class="text-muted">Estimate the likelihood of a customer purchasing a product based on price and promotion status.</p>
+                <form method="post">
+                    <div class="form-group">
+                        <label for="mean_price"><i class="fas fa-dollar-sign mr-1"></i>Mean Price (0.5-3.5)</label>
+                        <input type="number" step="0.01" min="0.5" max="3.5" class="form-control" id="mean_price" name="mean_price" placeholder="e.g., 1.50" required>
+                        <small class="form-text text-muted">Enter the average product price.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="promotion"><i class="fas fa-tag mr-1"></i>Promotion</label>
+                        <select class="form-control" id="promotion" name="promotion">
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                        <small class="form-text text-muted">Is a promotion active?</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-play mr-2"></i>Predict</button>
+                </form>
+            </div>
+        </div>
+        <div class="alert alert-info mt-4">
+            <h6><i class="fas fa-lightbulb mr-2"></i>Real-Life Application</h6>
+            <p>As a retail manager at <strong>Target</strong>, you’re launching a new line of seasonal candles. Input the average price (e.g., $2.00) and test with or without a promotion to see how likely customers are to buy, helping you set the perfect strategy.</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        {% if probability %}
+        <div class="card shadow-sm mt-4">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0"><i class="fas fa-check-circle mr-2"></i>Prediction Result</h5>
+            </div>
+            <div class="card-body text-center">
+                <h1 class="display-4 text-success">{{ probability|round(2) }}%</h1>
+                <p class="lead">There’s a <strong>{{ probability|round(2) }}%</strong> chance a customer will buy at this price and promotion setting.</p>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

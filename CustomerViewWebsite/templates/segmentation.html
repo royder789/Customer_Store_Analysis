@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-user mr-2"></i>Your Details</h5>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    <div class="form-group">
+                        <label for="sex" data-toggle="tooltip" title="Your gender">Sex</label>
+                        <select class="form-control" id="sex" name="sex">
+                            <option value="0">Male</option>
+                            <option value="1">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="marital_status" data-toggle="tooltip" title="Your current marital status">Marital Status</label>
+                        <select class="form-control" id="marital_status" name="marital_status">
+                            <option value="0">Single</option>
+                            <option value="1">Married</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="age" data-toggle="tooltip" title="Your age in years">Age</label>
+                        <input type="number" class="form-control" id="age" name="age" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="education" data-toggle="tooltip" title="Your highest level of education">Education</label>
+                        <select class="form-control" id="education" name="education">
+                            <option value="0">High School</option>
+                            <option value="1">College</option>
+                            <option value="2">Graduate</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="income" data-toggle="tooltip" title="Your annual income in dollars">Income ($)</label>
+                        <input type="number" class="form-control" id="income" name="income" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="occupation" data-toggle="tooltip" title="Your current occupation status">Occupation</label>
+                        <select class="form-control" id="occupation" name="occupation">
+                            <option value="0">Unemployed</option>
+                            <option value="1">Employed</option>
+                            <option value="2">Self-Employed</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="settlement_size" data-toggle="tooltip" title="The size of your residential area">Settlement Size</label>
+                        <select class="form-control" id="settlement_size" name="settlement_size">
+                            <option value="0">Small</option>
+                            <option value="1">Medium</option>
+                            <option value="2">Large</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-search mr-2"></i>Predict My Segment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        {% if prediction %}
+        <div class="card shadow-sm mt-4">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0"><i class="fas fa-users mr-2"></i>Your Predicted Segment</h5>
+            </div>
+            <div class="card-body">
+                <h3 class="text-success">{{ prediction }}</h3>
+                <h5>Top Brands for You</h5>
+                {% for category, data in brands.items() %}
+                <h6>{{ category }}</h6>
+                <ul class="list-group mb-3">
+                    {% for brand in data.brands %}
+                    <li class="list-group-item"><i class="fas {{ data.icon }} mr-2"></i>{{ brand }}</li>
+                    {% endfor %}
+                </ul>
+                {% endfor %}
+                {% if income_increase %}
+                <h5>Next Segment Opportunity</h5>
+                <p>Increase your income by <strong>${{ "%.2f"|format(income_increase) }}</strong> to reach <strong>{{ next_segment }}</strong>.</p>
+                <h6>Brands in {{ next_segment }}</h6>
+                {% for category, data in next_brands.items() %}
+                <h6>{{ category }}</h6>
+                <ul class="list-group mb-3">
+                    {% for brand in data.brands %}
+                    <li class="list-group-item"><i class="fas {{ data.icon }} mr-2"></i>{{ brand }}</li>
+                    {% endfor %}
+                </ul>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
