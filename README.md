@@ -150,17 +150,6 @@ In this notebook, we build predictive models to forecast purchase likelihood and
 * **Data Upload:** Admins can upload new CSVs to refresh data
 * **Responsive Design:** Mobile-friendly layout using React & Tailwind CSS
 
----
-
-##
-
-```
-```
-
-```
-```
-
----
 
 ## 🚀 Getting Started
 
