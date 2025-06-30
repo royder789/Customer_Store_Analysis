@@ -1,27 +1,205 @@
-In this machine learning project, I employ a variety of techniques to analyze customer data, focusing on segmentation, purchase analytics, and predictive modeling.
+**# Customer Store Analysis 🛍️**
 
-**Customer Segmentation**:
-In **Segmentation.ipynb**, I perform a comprehensive analysis using correlation estimates and data standardization. I apply segmentation methods such as hierarchical clustering, k-means clustering, and Principal Component Analysis (PCA). The process involves extensive visualizations including heatmaps, clusters, dendrograms, and scatter plots to segment and understand customer behavior. The dataset used for this analysis is **segmentation data.csv**.
+**Demo Website:** 🔗 \[Add your website link here]
 
-**Purchase Analytics Descriptive Analysis**:
-In **Purchase Analytics Descriptive Analysis.ipynb**, I leverage the segmentation model to divide customers into segments and extract insights about their shopping habits. This notebook involves thorough exploratory data analysis (EDA), addressing questions like shopping frequency, spending patterns, and product purchase frequency relative to store visits. I create dummy variables for essential features and analyze preferences, such as which brands are favored by different segments and the reasons behind their choices. The analysis also includes an examination of revenue across various segments. The data for this analysis is contained in **purchase data.csv**.I have conducted a detailed analysis to answer several key questions related to customer shopping behavior. These questions include:
+---
 
-1. Shopping Frequency: How often do customers go shopping?
-2. Spending Patterns: How much money do customers spend during their visits?
-3. Product Purchase Frequency: How often do customers buy a particular product relative to their store visits?
+## 🎯 Project Overview
 
-**Customer Analytics Predictive Analysis**:
-In **Customer Analytics Predictive Analysis.ipynb**, I delve into the calculation of price elasticity for purchase probability and quantity. This analysis includes evaluating purchase probabilities by segments, with and without promotions, as well as determining own and cross-price elasticities by segment. The analysis helps in understanding brand choices made by different customer segments.
+A data-driven web application that helps businesses analyze customer purchasing patterns and visualize insights through interactive dashboards and a user-friendly website.
 
-In my analysis of price elasticity, I explored how changes in price affect customer shopping behavior. Price elasticity measures the responsiveness of an output variable to a 1% change in an input variable. If the absolute value of 'price elasticity' is less than 1, the demand is considered 'inelastic.' This means a 1% change in price results in less than a 1% change in purchase probability, indicating that an increase in price will not significantly decrease purchase probability. For inelastic products, we can increase the price, whereas for elastic products, we need to decrease the price to boost purchases.
+---
 
-I conducted a detailed analysis to answer several key questions related to customer shopping behavior in response to price changes:
+## 📂 File Structure
 
-1. Own Brand-Price Elasticity: How does the purchase probability of a customer for a brand change with variations in the price of that brand?
-2. Cross-Price Elasticity: How does the purchase probability of a customer for a brand change with fluctuations in the price of other brands?
-3. Price Elasticity of Purchase Probability: How does the purchase probability change with and without promotion?
-4. Price Elasticity of Purchase Quantity: How does the purchase quantity change with and without promotion?
+```
+Customer_Store_Analysis/
+├── data/                   # Raw and processed datasets
+│   ├── raw/                # Original CSV and Excel files
+│   └── processed/          # Cleaned and merged data
+├── notebooks/              # Jupyter notebooks for exploration & modeling
+│   ├── EDA_Customer.ipynb  # Exploratory Data Analysis on customer demographics
+│   ├── Sales_Trend.ipynb   # Time-series analysis of sales trends
+│   └── Clustering.ipynb    # Customer segmentation using clustering
+├── backend/                # (Optional) Backend API code
+├── frontend/               # React app for the web interface
+│   ├── public/             # Static assets
+│   └── src/                # Components & pages
+├── requirements.txt        # Python dependencies
+├── package.json            # Node.js dependencies
+└── README.md               # This documentation
+```
 
-The dataset **segmentation data.csv** is utilized to build the segmentation model in the **Segmentation.ipynb** notebook. Accompanying this dataset, the **segmentation data legend.xlsx** file provides a detailed explanation of what each column represents within the segmentation data.
+---
 
-For the descriptive analysis conducted in the **Purchase Analytics Descriptive Analysis.ipynb** notebook, I used the **purchase data.csv** dataset. This dataset includes purchase data from a convenience store, recorded on a daily basis over a period of two years. In this project, I focused specifically on the purchase of chocolate candy bars. The **purchase data legend.xlsx** file contains the legends, explaining what each column in the **purchase data.csv** file signifies.
+## 📝 Notebooks Explained
+
+Below is a detailed walkthrough of each analysis notebook, describing objectives, methodologies, datasets, and key deliverables.
+
+**1. Segmentation.ipynb** 🔍
+
+In this notebook, we perform customer segmentation to uncover distinct groups based on purchasing behavior and demographics:
+
+* **Data Loading & Preparation:**
+
+  * Dataset: `segmentation_data.csv` (customer attributes) with definitions in `segmentation_data_legend.xlsx`.
+  * Handle missing values, outliers, and ensure consistent data types.
+
+* **Correlation Analysis & Standardization:**
+
+  * Compute a correlation matrix to identify relationships between numerical features.
+  * Apply Z‑score standardization to normalize features before clustering.
+
+* **Dimensionality Reduction (PCA):**
+
+  * Use Principal Component Analysis to reduce feature space while retaining > 90% variance.
+  * Visualize principal components to confirm separation potential.
+
+* **Clustering Techniques:**
+
+  * **Hierarchical Clustering:** Build dendrograms to infer a natural cluster count.
+  * **K‑Means Clustering:** Experiment with K values (using the elbow and silhouette methods) and assign final cluster labels.
+
+* **Visualization & Interpretation:**
+
+  * Heatmaps of standardized feature clusters.
+  * Dendrogram plot to illustrate hierarchical structure.
+  * Scatter plots of the first two principal components, colored by cluster.
+
+* **Outcome:** A segmentation model saved as `segmentation_model.pkl`, cluster summaries detailing average feature values per group.
+
+---
+
+**2. Purchase\_Analytics\_Descriptive\_Analysis.ipynb** 🛒
+
+This notebook leverages the segmentation results to explore shopping habits and revenue patterns:
+
+* **Data Loading:**
+
+  * Dataset: `purchase_data.csv` (daily transactions for a two‑year period focusing on chocolate candy bars).
+  * Column definitions in `purchase_data_legend.xlsx`.
+
+* **Assigning Segments:**
+
+  * Load `segmentation_model.pkl` and map each customer in the purchase data to their segment.
+
+* **Exploratory Data Analysis (EDA):**
+
+  * **Shopping Frequency:** Calculate average store visits per month by segment.
+  * **Spending Patterns:** Assess total and per‑visit spend distributions.
+  * **Product Purchase Frequency:** Compute purchase rate per item relative to store visits.
+
+* **Brand Preferences & Revenue:**
+
+  * Create dummy variables for top brands and examine brand affinity by segment.
+  * Analyze segment‑wise revenue contribution and identify high‑value customer groups.
+
+* **Visualizations:**
+
+  * Bar charts of visit frequency and spend by segment.
+  * Box plots of per‑visit expenditure.
+  * Stacked area charts showing revenue trends over time.
+
+* **Outcome:** Insight report summarizing key segment behaviors and recommendations for targeted marketing.
+
+---
+
+**3. Customer\_Analytics\_Predictive\_Analysis.ipynb** 🤖
+
+In this notebook, we build predictive models to forecast purchase likelihood and quantity:
+
+* **Feature Engineering:**
+
+  * Generate features such as recency, frequency, and monetary value (RFM) metrics.
+  * Encode segment labels and promotional flags.
+
+* **Modeling Approach:**
+
+  * **Classification Model:** Predict purchase occurrence using Logistic Regression and Random Forest classifiers.
+  * **Regression Model:** Predict purchase quantity via Linear Regression and Gradient Boosting.
+
+* **Training & Evaluation:**
+
+  * Split data into training/test sets (80/20).
+  * Evaluate classification accuracy, precision, recall, and ROC‑AUC.
+  * Assess regression performance with RMSE and R² metrics.
+
+* **Scenario Analysis:**
+
+  * Compare model outputs under promotion vs. non‑promotion scenarios.
+  * Feature importance plots to highlight key drivers of purchase behavior.
+
+* **Visualizations:**
+
+  * ROC curves and confusion matrices for classifiers.
+  * Scatter plots of actual vs. predicted quantities.
+
+* **Outcome:** Saved models (`purchase_classifier.pkl`, `quantity_regressor.pkl`) with documented performance metrics and a summary of actionable insights for pricing and promotions.
+
+---
+
+## 💻 Website Functionality
+
+* **Home Page:** Overview of the application and quick stats
+* **Dashboard:** Interactive charts built with Plotly/D3 showing:
+
+  * Customer demographics
+  * Sales trends over time
+  * Cluster segments and profiles
+* **User Management:** Signup, login, and role-based access
+* **Data Upload:** Admins can upload new CSVs to refresh data
+* **Responsive Design:** Mobile-friendly layout using React & Tailwind CSS
+
+---
+
+##
+
+```
+```
+
+```
+```
+
+---
+
+## 🚀 Getting Started
+
+1. **Clone the repo**
+
+   ```bash
+   git clone https://github.com/royder789/Customer_Store_Analysis.git
+   cd Customer_Store_Analysis
+   ```
+2. **Install Python dependencies**
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. **Install Node.js dependencies**
+
+   ```bash
+   cd frontend
+   npm install
+   ```
+4. **Run Notebooks**
+
+   ```bash
+   jupyter notebook
+   ```
+5. **Start Frontend**
+
+   ```bash
+   npm start
+   ```
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request.
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License.
